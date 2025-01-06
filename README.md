@@ -1,2 +1,0 @@
-# Aptpath-PythonTaskManager
-Task Manager

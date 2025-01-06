@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login & Signup Form</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(45deg, #09050d, #2575fc);
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      text-align: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .form-container:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-3px);
+    }
+
+    .admin-btn {
+      background-color: #e74c3c;
+      margin-top: 15px;
+    }
+
+    .admin-btn:hover {
+      background-color: #c0392b;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+      transition: border 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      border: 2px solid #3498db;
+      outline: none;
+    }
+
+    input[type="text"]::placeholder, input[type="password"]::placeholder {
+      color: #7f8c8d;
+    }
+
+    .register-fields {
+      display: none;
+    }
+
+    .toggle-btns {
+      margin-bottom: 20px;
+    }
+
+    .toggle-btns button {
+      width: 48%;
+      padding: 12px;
+      margin: 0 4%;
+      border-radius: 6px;
+      background-color: #96aabe;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .toggle-btns button:hover {
+      background-color: #34495e;
+      transform: translateY(-3px);
+    }
+
+    .toggle-btns .active {
+      background-color: #3498db;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h1>Login or Register</h1>
+  <!-- Toggle between Login and Register -->
+  <div class="toggle-btns">
+    <button type="button" onclick="toggleForm('login')" id="login-btn" class="btn active">Login</button>
+    <button type="button" onclick="toggleForm('register')" id="register-btn" class="btn">Register</button>
+  </div>
+
+  <!-- Login Form -->
+  <form method="POST" action="/" id="login-form">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="hidden" name="action" value="Login">
+    <button type="submit" class="btn">Login</button>
+  </form>
+
+  <!-- Register Form (initially hidden) -->
+  <form method="POST" action="/" id="register-form" class="register-fields">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    <input type="hidden" name="action" value="Register">
+    <button type="submit" class="btn">Register</button>
+  </form>
+
+  <!-- Admin Login Button -->
+  <form action="/admin_login" method="GET" id="admin-login">
+    <button type="submit" class="btn admin-btn">Admin Login</button>
+  </form>
+</div>
+
+<script>
+  // Function to toggle between Login and Register forms
+  function toggleForm(formType) {
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const adminLogin = document.getElementById('admin-login');
+    const loginBtn = document.getElementById('login-btn');
+    const registerBtn = document.getElementById('register-btn');
+
+    if (formType === 'register') {
+      loginForm.style.display = 'none';
+      adminLogin.style.display = 'none';
+      registerForm.style.display = 'block';
+      registerBtn.classList.add('active');
+      loginBtn.classList.remove('active');
+    } else {
+      loginForm.style.display = 'block';
+      adminLogin.style.display = 'block';
+      registerForm.style.display = 'none';
+      registerBtn.classList.remove('active');
+      loginBtn.classList.add('active');
+    }
+  }
+
+  // Initialize the default form to be the login form
+  toggleForm('login');
+</script>
+
+</body>
+</html>
